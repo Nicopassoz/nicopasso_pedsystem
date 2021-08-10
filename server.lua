@@ -1,7 +1,7 @@
 ESX = nil
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
-RegisterServerEvent('nicopasso_checkped') -- funzione per il check nel db se un player ha un ped o meno e se lo ha glielo setta
+RegisterServerEvent('nicopasso_checkped') -- ITA: funzione per il check nel db se un player ha un ped o meno e se lo ha glielo setta --ENG: function to check in the db if a player has a ped or not and if he does, it sets it to the player
 AddEventHandler('nicopasso_checkped', function(source)
 		local xPlayer = ESX.GetPlayerFromId(source)
 		MySQL.Async.fetchAll("SELECT identifier FROM ped WHERE identifier = @steam", {
