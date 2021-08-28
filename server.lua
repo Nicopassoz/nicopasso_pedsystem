@@ -18,20 +18,6 @@ end)
 	end
 end)
 
-RegisterServerEvent('nicopasso_checkped') -- ITA: funzione per il check nel db se un player ha un ped o meno e se lo ha glielo setta --ENG: function to check in the db if a player has a ped or not and if he does, it sets it to the player
-AddEventHandler('nicopasso_checkped', function(source)
-		local xPlayer = ESX.GetPlayerFromId(source)
-		MySQL.Async.fetchAll("SELECT identifier FROM ped WHERE identifier = @steam", {
-			["@steam"] = xPlayer.identifier
-		}, function (result)
-			if #result ~= 0 then
-				local peddamettere = MySQL.Sync.fetchScalar("SELECT ped FROM ped WHERE identifier = @steam", {
-					["@steam"] = xPlayer.identifier})
-				TriggerClientEvent('nicopasso_settoilfottutoped', source, peddamettere)
-			end
-	end)
-end)
-
 RegisterCommand('setped', function(source, args) -- ITA:comando per il set del ped --ENG: command for set a ped to players
 		local xPlayer = ESX.GetPlayerFromId(source) 
 		id = args[1]
