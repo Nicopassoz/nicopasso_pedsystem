@@ -1,5 +1,22 @@
 ESX = nil
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+local set = true
+AddEventHandler("esx:playerLoaded", function(source)
+	Citizen.Wait(6000)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	if not set then
+	MySQL.Async.fetchAll("SELECT identifier FROM ped WHERE identifier = @steam", {
+		["@steam"] = xPlayer.identifier
+	}, function (result)
+		if #result ~= 0 then
+			local peddamettere = MySQL.Sync.fetchScalar("SELECT ped FROM ped WHERE identifier = @steam", {
+				["@steam"] = xPlayer.identifier})
+			TriggerClientEvent('nicopasso_settoilfottutoped', source, peddamettere)
+		end
+end)
+  		set = true
+	end
+end)
 
 RegisterServerEvent('nicopasso_checkped') -- ITA: funzione per il check nel db se un player ha un ped o meno e se lo ha glielo setta --ENG: function to check in the db if a player has a ped or not and if he does, it sets it to the player
 AddEventHandler('nicopasso_checkped', function(source)
