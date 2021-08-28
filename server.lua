@@ -1,11 +1,11 @@
 ESX = nil
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 local set = true
-AddEventHandler("esx:playerLoaded", function(source)
-	Citizen.Wait(6000)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	if not set then
-	MySQL.Async.fetchAll("SELECT identifier FROM ped WHERE identifier = @steam", {
+AddEventHandler("esx:playerLoaded", function(source) 
+	Citizen.Wait(6000)--ITA: questa sarebbe la funzione che quando un player è spawnato aspetta i secondi nel wait e 
+	local xPlayer = ESX.GetPlayerFromId(source) --poi checca nel db se uno ha un ped e se ce l'ha glielo setta
+		if not set then	 --ENG: this would be the function that when a player is spawned it waits for the seconds in the citizem.wait and
+			MySQL.Async.fetchAll("SELECT identifier FROM ped WHERE identifier = @steam", {	--then queer in the db if one has a ped and if he does, he sets it to him
 		["@steam"] = xPlayer.identifier
 	}, function (result)
 		if #result ~= 0 then
@@ -65,16 +65,16 @@ RegisterCommand('setped', function(source, args) -- ITA:comando per il set del p
 						end
 					end
 					if not trovato then
-						xPlayer.showNotification('Ped non valido')
+						TriggerClientEvent('esx:showNotification', source, 'Ped non valido')
 					end
 				else
-                	xPlayer.showNotification('Player Non online!')
+                	TriggerClientEvent('esx:showNotification', source, 'Player Non online!')
             	end
 			else
-				xPlayer.showNotification("Devi specficare l'id e il ped da settare!")
+				TriggerClientEvent('esx:showNotification', source, "Devi specficare l'id e il ped da settare!")
 			end
 		else 
-			xPlayer.showNotification('Non hai i permessi')
+			TriggerClientEvent('esx:showNotification', source, 'Non hai i permessi')
 		end
 end)
 
@@ -92,16 +92,16 @@ RegisterCommand('resetped', function(source, args) -- ITA: COMANDO PER IL RESET 
 						MySQL.Async.execute("DELETE FROM ped WHERE identifier=@identifier", { ["@identifier"] = result[1].identifier })
 						TriggerClientEvent('reset', id)
 					else 
-						xPlayer.showNotification('Errore, sembra che il player non abbia un ped settato')
+						TriggerClientEvent('esx:showNotification', source, 'Errore, sembra che il player non abbia un ped settato')
 					end
 				end)
 			else
-				xPlayer.showNotification('Player Non online!')
+				TriggerClientEvent('esx:showNotification', source, 'Player Non online!')
 			end
 		else
-			xPlayer.showNotification("Devi specficare l'id del player!")
+			TriggerClientEvent('esx:showNotification', source, ("Devi specficare l'id del player!")
 		end
 	else 
-		xPlayer.showNotification('Non hai i permessi')
+		TriggerClientEvent('esx:showNotification', source,'Non hai i permessi')
 	end
 end)
