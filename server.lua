@@ -53,7 +53,7 @@ RegisterCommand('setped', function(source, args) -- ITA:comando per il set del p
 										MySQL.Async.execute("UPDATE ped SET ped = @ped WHERE identifier = @identifier",
 										{['@identifier'] = xPlayerPed.identifier, ['@ped'] = peddino.nome}) 
 									else
-										xPlayer.showNotification('Stai settando il ped che il player già ha!')
+										TriggerClientEvent('esx:showNotification', source, 'Stai settando il ped che il player già ha!')
 									end
 								else
 									TriggerClientEvent('nicopasso_settoilfottutoped', id, peddino.nome)
@@ -99,7 +99,7 @@ RegisterCommand('resetped', function(source, args) -- ITA: COMANDO PER IL RESET 
 				TriggerClientEvent('esx:showNotification', source, 'Player Non online!')
 			end
 		else
-			TriggerClientEvent('esx:showNotification', source, ("Devi specficare l'id del player!")
+			TriggerClientEvent('esx:showNotification', source, "Devi specficare l'id del player!")
 		end
 	else 
 		TriggerClientEvent('esx:showNotification', source,'Non hai i permessi')
