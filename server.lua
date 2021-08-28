@@ -1,7 +1,8 @@
 ESX = nil
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-local set = true
+
 AddEventHandler("esx:playerLoaded", function(source) 
+	local set = false
 	Citizen.Wait(8000)--ITA: questa sarebbe la funzione che quando un player è spawnato aspetta i secondi nel wait e 
 	local xPlayer = ESX.GetPlayerFromId(source) --poi checca nel db se uno ha un ped e se ce l'ha glielo setta
 		if not set then	 --ENG: this would be the function that when a player is spawned it waits for the seconds in the citizem.wait and
