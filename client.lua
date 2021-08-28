@@ -8,15 +8,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[[AddEventHandler("playerSpawned", function()
-	print('parto')
-	Citizen.Wait(12000)
-	TriggerServerEvent('nicopasso_checkped', GetPlayerServerId(PlayerId())) 
-	print('finisco') --ITA: l'ho commentata perchè io ho il check integrato nel prp-characters, cmq questa sarebbe la funzione che quando un player è spawnato aspetta i secondi nel wait e 
-end)--]]			 --poi checca nel db se uno ha un ped e se ce l'ha glielo setta
-					--ENG: I commented on it because I have the check integrated in the prp-characters, btw this would be the function that when a player is spawned it waits for the seconds in the citizem.wait and
-					--then queer in the db if one has a ped and if he does, he sets it to him
-
 
 TriggerEvent('chat:addSuggestion', '/setped', 'Setta un ped al player', {
     { name="id", help="Id del player" },
