@@ -14,7 +14,7 @@ AddEventHandler("esx:playerLoaded", function(source)
     end)
 end)
 
-RegisterCommand('setped', function(source, args)
+RegisterCommand('setped', function(source, args) -- ITA: COMANDO PER IL SET DEL PED   --ENG: COMMAND FOR SET PED TO A PLAYER
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local id = args[1]
 	local ped = args[2]
